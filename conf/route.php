@@ -14,30 +14,30 @@ class Routing
             $modelName = ucfirst($route[1] . "Model");
         }
 
-
         if (isset($route[2]) && $route[2] != '') {
             $action = $route[2];
         }
 
-        if (empty($_SESSION['user']) or $_SESSION['user'] != 'user 1' or $_SESSION['user'] != 'user 2') {
-            $controllerName = "IndexController";
-            $modelName = "IndexModel";
-            $action = "index";
-        }
-        if ($_SESSION['user'] == 'user 1') {
-            $controllerName = "UserController";
-            $modelName = "UserModel";
-            $action = "index";
-        }
-        if ($_SESSION['user'] == 'user 2') {
-            $controllerName = "AdminController";
-            $modelName = "AdminModel";
-            $action = "index";
-        }
-        require_once CONTROLLER_PATH . $controllerName . ".php";
-        require_once MODEL_PATH . $modelName . ".php";
-        $controller = new $controllerName();
-        $controller->$action();
+        $controller_path = CONTROLLER_PATH . $controllerName . ".php";
+        $model_path = MODEL_PATH . $modelName . ".php";
 
+        if (file_exists($controller_path) && file_exists($model_path)) {
+            require_once $controller_path;
+            require_once $model_path;
+            $controller = new $controllerName();
+            $controller->$action();
+        } else {
+
+            Routing::ErrorPage404();
+        }
+
+    }
+
+    function ErrorPage404()
+    {
+        $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+        header('HTTP/1.1 404 Not Found');
+        header("Status: 404 Not Found");
+        header('Location:' . $host . '404');
     }
 }
