@@ -14,15 +14,13 @@ class UserModel extends Model
         return $res;
     }
 
-    public function addProblem()
+    public function addProblem($data)
     {
-        $problem = $_POST['problem'];
-        $decision = $_POST['decision'];
-        $sql = "INSERT INTO problem (problem, decision) VALUES (:problem, :decision)";
+        $key = '`' . implode('`, `', array_keys($data)) . '`';
+        $value   = ':' . implode(', :', array_keys($data));
+        $sql = "INSERT INTO `problem` ({$key}) VALUES ({$value})";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(":problem", $problem, PDO::PARAM_STR);
-        $stmt->bindValue(":decision", $decision, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->execute($data);
         return true;
     }
 }

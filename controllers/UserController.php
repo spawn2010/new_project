@@ -13,9 +13,10 @@ class UserController extends Controller
 
     public function index()
     {
+        $data = $_POST;
         $this->pageData['problem'] = $this->model->renderProblem();
         if (!empty($_POST['problem']) && !empty($_POST['decision'])) {
-            $this->model->addProblem();
+            $this->model->addProblem($data);
             header("Location: /User");
         }
         $this->model->renderProblem();
@@ -29,7 +30,6 @@ class UserController extends Controller
 
         }
     }
-
 
 }
 
