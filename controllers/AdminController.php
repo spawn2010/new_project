@@ -6,6 +6,7 @@ class AdminController extends Controller
     {
         $this->model = new AdminModel();
         $this->view = new View();
+        $this->beforeAction();
     }
     public function index()
     {
@@ -16,6 +17,14 @@ class AdminController extends Controller
         }
         $this->model->renderRating();
         $this->view->render($this->pageTpl, $this->pageData);
+    }
+
+    public function beforeAction()
+    {
+        if($_SESSION['user'] != 'user 2' ){
+            header("Location: /user");
+
+        }
     }
 }
 ?>

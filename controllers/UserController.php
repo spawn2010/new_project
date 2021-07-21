@@ -6,6 +6,7 @@ class UserController extends Controller
 
     public function __construct()
     {
+        $this->beforeAction();
         $this->model = new UserModel();
         $this->view = new View();
     }
@@ -20,6 +21,16 @@ class UserController extends Controller
         $this->model->renderProblem();
         $this->view->render($this->pageTpl, $this->pageData);
     }
+
+    public function beforeAction()
+    {
+        if($_SESSION['user'] != 'user 1' ){
+            header("Location: /admin");
+
+        }
+    }
+
+
 }
 
 ?>
