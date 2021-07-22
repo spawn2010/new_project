@@ -1,35 +1,62 @@
 <?php
+
 class IndexController extends Controller
-{
-    private $pageTpl = '/views/indexView.php';
-    public function __construct()
     {
+    private $pageTpl = '/views/indexView.php';
+
+    public function __construct()
+        {
         $this->model = new IndexModel();
         $this->view = new View();
         $this->beforeAction();
-    }
+        }
+
     public function index()
-    {
+        {
         $this->pageData['title'] = "Вход в личный кабинет";
-        //var_dump($_POST);
-        if($_POST['add']){
-            if ($_POST['login']&&$_POST['password'] != ''){
-           $this->model->addUser();
-            $this->pageData['error'] = "Вы успешно зарегестрированы";
-        }else{
+        if ($_POST['add'])
+            {
+            if ($_POST['login'] && $_POST['password'] != '')
+                {
+                $login = $_POST['login'];
+                $pass = md5($_POST['password']);
+                $this->model->addUser($login, $pass);
+                $this->pageData['error'] = "Вы успешно зарегестрированы";
+                } else
+                {
                 $this->pageData['error'] = "Введите логин и пароль";
+                }
             }
-        }
-        if (!empty($_POST['check'])) {
-            if (!$this->model->checkUser()) {
+        if (!empty($_POST['check']))
+            {
+            $login = $_POST['login'];
+            $pass = md5($_POST['password']);
+            if ($this->model->checkUser($login, $pass))
+                {
                 $this->pageData['error'] = "Неправильный логин или пароль";
+                } else
+                {
+                $this->redirect('/problem');
+                }
+            }
+        $this->view->render($this->pageTpl, $this->pageData);
+        }
+
+    public function beforeAction()
+        {
+        if ($_SESSION['user'] == 'user 1' or $_SESSION['user'] == 'user 2')
+            {
+            $this->redirect('/problem');
             }
         }
-        $this->view->render($this->pageTpl, $this->pageData);
+
+    public function logout()
+        {
+        session_start();
+        session_destroy();
+        $this->redirect('/');
+        exit;
+        }
     }
-    public function beforeAction()
-    {
-      //  var_dump($_SESSION);
-    }
-}
+
 ?>

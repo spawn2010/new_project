@@ -10,6 +10,4 @@ require_once("route.php");
 require_once 'core\Model.php';
 require_once 'core\View.php';
 require_once 'core\Controller.php';
-
-
 Routing::buildRoute();

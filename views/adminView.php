@@ -29,37 +29,43 @@
         </tr>
         <?php
         $k = 1;
-        foreach ($pageData['problem'] as $key => $value) { ?>
-            <tr>
-                <td><?php echo $value['problem']; ?></td>
-                <td><?php echo $value['decision']; ?> </td>
-                <td>
-                    <div class="rating-result">
-                        <?php $i = 1;
-                        if ($value['rating'] != '') {
-                        while ($i <= $value['rating']) {
-                            echo '<span class="active"></span>';
-                            $i++;
-                        } ?></div><?php
-                    } else { ?>
-                        <form method="post">
-                            <div class="rating-area">
-                                <?php for ($n = 5; $n != 0; $n--) {
-                                    ?><input type="submit" id="star-.<?= $k ?>" name="<?= $value ['id']; ?>"
-                                             value="<?= $n ?>">
-                                <label for="star-.<?= $k;
-                                $k++ ?>" title="Оценка «5»"></label><?php
-                                } ?>
-                            </div>
-                        </form>
-                        <?php ;
-                    } ?> </td>
-            </tr>
-        <?php } ?>
+        foreach ($pageData['problem'] as $key => $value)
+            { ?>
+                <tr>
+                    <td><?php echo $value['problem']; ?></td>
+                    <td><?php echo $value['decision']; ?> </td>
+                    <td>
+                        <div class="rating-result">
+                            <?php $i = 1;
+                            if ($value['rating'] != '')
+                            {
+                            while ($i <= $value['rating'])
+                                {
+                                echo '<span class="active"></span>';
+                                $i++;
+                                } ?></div><?php
+                        } else
+                            { ?>
+                                <form method="post">
+                                    <div class="rating-area">
+                                        <?php for ($n = 5; $n != 0; $n--)
+                                            {
+                                            ?><input  formaction="problem/addRating" type="submit" id="star-.<?= $k ?>"
+                                                      name="<?= $value ['id']; ?>"
+                                                      value="<?= $n ?>">
+                                            <label for="star-.<?= $k;
+                                            $k++ ?>" title="Оценка «5»"></label><?php
+                                            } ?>
+                                    </div>
+                                </form>
+                            <?php ;
+                            } ?> </td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
 </form>
-<form action="core/exit.php" method="post">
+<form action="index/logout" method="post">
     <button class="btn btn-success" type="submit" name="exit">Выйти</button>
 </form>
 </body>
