@@ -13,6 +13,7 @@ class IndexModel extends Model
                 } elseif ($res['name'] == 'admin')
                 {
                 $_SESSION['user'] = 'user 2';
+                $_SESSION['right'] = 'admin';
                 }
             } else
             {

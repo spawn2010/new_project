@@ -1,6 +1,6 @@
 <?php
 
-class Routing
+class Router
     {
     public static function buildRoute()
         {
@@ -27,7 +27,7 @@ class Routing
             $controller->$action();
             } else
             {
-            Routing::ErrorPage404();
+            Router::ErrorPage404();
             }
         }
 

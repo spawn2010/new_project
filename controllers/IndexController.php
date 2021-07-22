@@ -44,7 +44,7 @@ class IndexController extends Controller
 
     public function beforeAction()
         {
-        if ($_SESSION['user'] == 'user 1' or $_SESSION['user'] == 'user 2')
+        if ($_SESSION['user'])
             {
             $this->redirect('/problem');
             }

@@ -2,8 +2,11 @@
 
 class ProblemController extends Controller
     {
+    public $pageTpl = "/views/userView.php";
+
     public function __construct()
         {
+        $this->beforeAction();
         $this->model = new ProblemModel();
         $this->view = new View();
         }
@@ -13,16 +16,13 @@ class ProblemController extends Controller
         $this->pageData['problem'] = $this->model->getProblem();
         if ($_SESSION['user'] == 'user 1')
             {
-            $pageTpl = "/views/userView.php";
             $this->model->getProblem();
-            $this->view->render($pageTpl, $this->pageData);
             }
         if ($_SESSION['user'] == 'user 2')
             {
-            $pageTpl = "/views/adminView.php";
             $this->model->getRating();
-            $this->view->render($pageTpl, $this->pageData);
             }
+        $this->view->render($this->pageTpl, $this->pageData);
         }
 
     public function addProblem()
@@ -45,6 +45,14 @@ class ProblemController extends Controller
             }
         header_remove();
         $this->redirect('/problem');
+        }
+
+    public function beforeAction()
+        {
+        if ($_SESSION['right'])
+            {
+            $this->pageTpl = "/views/adminView.php";
+            }
         }
     }
 
