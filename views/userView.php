@@ -31,21 +31,19 @@
             </td>
         </tr>
         <?php
-        foreach ($pageData['problem'] as $key => $value)
-            { ?>
-                <tr>
-                    <td><?php echo $value['problem']; ?></td>
-                    <td><?php echo $value['decision']; ?> </td>
-                    <td>
-                        <div class="rating-result"><?php $i = 1;
-                            while ($i <= $value['rating'])
-                                {
-                                echo '<span class="active"></span>';
-                                $i++;
-                                } ?> </div>
-                    </td>
-                </tr>
-            <?php } ?>
+        foreach ($pageData['problem'] as $key => $value) { ?>
+            <tr>
+                <td><?php echo $value['problem']; ?></td>
+                <td><?php echo $value['decision']; ?> </td>
+                <td>
+                    <div class="rating-result"><?php $i = 1;
+                        while ($i <= $value['rating']) {
+                            echo '<span class="active"></span>';
+                            $i++;
+                        } ?> </div>
+                </td>
+            </tr>
+        <?php } ?>
         </tbody>
     </table>
     <button class="btn btn-success" type="submit">Добавить</button>
