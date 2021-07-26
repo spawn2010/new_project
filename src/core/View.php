@@ -1,5 +1,5 @@
 <?php
-
+namespace src\core;
 class View
 {
     public $tpl = [];

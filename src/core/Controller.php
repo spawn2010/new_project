@@ -1,5 +1,7 @@
 <?php
 
+namespace src\core;
+
 class Controller
 {
     public $model;

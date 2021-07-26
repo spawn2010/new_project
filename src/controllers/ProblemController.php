@@ -1,5 +1,10 @@
 <?php
 
+namespace src\controllers;
+
+use src\core\Controller;
+use src\core\View;
+
 class ProblemController extends Controller
 {
     public $pageTpl = "/views/userView.php";

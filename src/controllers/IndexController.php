@@ -1,5 +1,9 @@
 <?php
 
+namespace src\controllers;
+use src\models\IndexModel;
+use src\core\View;
+use src\core\Controller;
 class IndexController extends Controller
 {
     private $pageTpl = '/views/indexView.php';

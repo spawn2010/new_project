@@ -1,5 +1,5 @@
 <?php
-
+namespace conf;
 class DB
 {
     const USER = "root";

@@ -1,5 +1,7 @@
 <?php
-
+namespace src\models;
+use PDO;
+use src\core\Model;
 class IndexModel extends Model
 {
     public function checkUser($login, $pass)

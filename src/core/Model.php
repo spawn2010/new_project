@@ -1,4 +1,6 @@
 <?php
+namespace src\core;
+use PDO;
 
 class Model
 {
@@ -6,7 +8,7 @@ class Model
 
     public function __construct()
     {
-        $this->db = DB::connToDB();
+        $this->db = \DB::connToDB();
     }
 
     public function getUser($login, $pass)
