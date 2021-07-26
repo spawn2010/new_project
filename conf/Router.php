@@ -1,4 +1,5 @@
 <?php
+
 namespace conf;
 
 
@@ -21,11 +22,11 @@ class Router
         $controller_path = CONTROLLER_PATH . $controllerName . ".php";
         $model_path = MODEL_PATH . $modelName . ".php";
         if (file_exists($controller_path) && file_exists($model_path)) {
-           // require_once $controller_path;
+            // require_once $controller_path;
             //require_once $model_path;
-            echo $controllerName."<br>";
-           $controller = new $controllerName();
-           $controller->$action();
+            //echo $controllerName . "<br>";
+            $controller = new $controllerName();
+            $controller->$action();
         } else {
             Router::ErrorPage404();
         }

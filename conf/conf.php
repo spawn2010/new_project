@@ -13,11 +13,26 @@ spl_autoload_register(function ($class) {
         require $class.'.php';
         echo 'подключен - '.$class.'.php<br>';
     }else{
-        echo 'src/controllers/'.$class.'.php<br>';
+
+       echo 'не найден '.$class.'.php<br>';
+       // не понимаю почему при такой записи require подключается Controller.php
+        // а при такой нет 'src/controllers/'.$class.'.php', как по мне он в принципе не должен подключаться потому что нигде я не увидел в коде чтобы создавался объект Controller
         require 'src/controllers/'.$class.'.php';
     }
 
+    //  в чем проблема, почему не подключается IndexController...
+    //  при этом подключение Router отрабатывает нормально.
+    // есть подозрение что проблема в пространстве имен, но пробовал по разному через use ничего не вышло
+/*
+Что я виже в окне браузера с адресом mvc/
+подключен - conf\Router.php
+IndexController
+не найден IndexController.php
+подключен - src\core\Controller.php
 
+Fatal error: Uncaught Error: Class 'IndexController' not found in C:\OpenServer\domains\mvc\conf\Router.php:28 Stack trace: #0 C:\OpenServer\domains\mvc\conf\conf.php(41): conf\Router::buildRoute() #1 C:\OpenServer\domains\mvc\index.php(5): require_once('C:\\OpenServer\\d...') #2 {main} thrown in C:\OpenServer\domains\mvc\conf\Router.php on line 28
+
+*/
 
 
 });
