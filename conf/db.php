@@ -1,5 +1,4 @@
 <?php
-
 namespace conf;
 class DB
 {

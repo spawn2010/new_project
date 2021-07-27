@@ -1,7 +1,5 @@
 <?php
-
 namespace src\core;
-
 use PDO;
 
 class Model
