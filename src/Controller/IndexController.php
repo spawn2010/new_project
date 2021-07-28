@@ -1,27 +1,30 @@
 <?php
 
-namespace src\controllers;
-use src\models\IndexModel;
-use src\core\View;
-use src\core\Controller;
+namespace Controller;
+
+use Core\Controller;
+use Model\IndexModel;
+use Core\View;
+
 class IndexController extends Controller
 {
+
     private $pageTpl = '/views/indexView.php';
 
-    public function __construct()
+    public function __construct ()
     {
         $this->model = new IndexModel();
         $this->view = new View();
         $this->beforeAction();
     }
 
-    public function index()
+    public function index ()
     {
         $this->pageData['title'] = "Вход в личный кабинет";
         if ($_POST['add']) {
-            if ($_POST['login'] && $_POST['password'] != '') {
+            if ($_POST['login'] && $_POST['pass'] != '') {
                 $login = $_POST['login'];
-                $pass = md5($_POST['password']);
+                $pass = md5($_POST['pass']);
                 $this->model->addUser($login, $pass);
                 $this->pageData['error'] = "Вы успешно зарегестрированы";
             } else {
@@ -30,7 +33,7 @@ class IndexController extends Controller
         }
         if (!empty($_POST['check'])) {
             $login = $_POST['login'];
-            $pass = md5($_POST['password']);
+            $pass = md5($_POST['pass']);
             if ($this->model->checkUser($login, $pass)) {
                 $this->pageData['error'] = "Неправильный логин или пароль";
             } else {
@@ -40,14 +43,14 @@ class IndexController extends Controller
         $this->view->render($this->pageTpl, $this->pageData);
     }
 
-    public function beforeAction()
+    public function beforeAction ()
     {
         if ($_SESSION['user']) {
             $this->redirect('/problem');
         }
     }
 
-    public function logout()
+    public function logout ()
     {
         session_start();
         session_destroy();

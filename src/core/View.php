@@ -1,10 +1,12 @@
 <?php
-namespace src\core;
+
+namespace Core;
 class View
 {
+
     public $tpl = [];
 
-    public function render($tpl, $pageData)
+    public function render ($tpl, $pageData)
     {
         include ROOT . $tpl;
     }
