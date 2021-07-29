@@ -8,7 +8,7 @@ class DB
     const HOST = "localhost";
     const DB = "register-bd";
 
-    public static function connToDB ()
+    public static function connToDB()
     {
         $user = self::USER;
         $pass = self::PASS;

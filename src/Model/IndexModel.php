@@ -7,9 +7,8 @@ use PDO;
 
 class IndexModel extends Model
 {
-// все параметры которые я здесь определяю и передаю  функциям Core/Model должны быть здесь или же они должны определяться
-// в контроллере и передаваться сюда ?
-    public function checkUser ($login, $pass)
+
+    public function checkUser($login, $pass)
     {
         $table = 'users';
         $data['login'] = $login;
@@ -17,19 +16,10 @@ class IndexModel extends Model
         $params['param_1'] = 'WHERE login = :login';
         $params['param_2'] = 'AND pass = :pass';
         $res = $this->get($table, $data, $params);
-        if (!empty($res)) {
-            if ($res['name'] == 'user') {
-                $_SESSION['user'] = 'user 1';
-            } elseif ($res['name'] == 'admin') {
-                $_SESSION['user'] = 'user 2';
-                $_SESSION['right'] = 'admin';
-            }
-        } else {
-            return isset($res);
-        }
+        return ($res);
     }
 
-    public function addUser ($login, $pass)
+    public function addUser($login, $pass)
     {
         $data = [
             'login' => "$login",

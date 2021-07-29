@@ -11,14 +11,14 @@ class IndexController extends Controller
 
     private $pageTpl = '/views/indexView.php';
 
-    public function __construct ()
+    public function __construct()
     {
         $this->model = new IndexModel();
         $this->view = new View();
         $this->beforeAction();
     }
 
-    public function index ()
+    public function index()
     {
         $this->pageData['title'] = "Вход в личный кабинет";
         if ($_POST['add']) {
@@ -34,23 +34,24 @@ class IndexController extends Controller
         if (!empty($_POST['check'])) {
             $login = $_POST['login'];
             $pass = md5($_POST['pass']);
-            if ($this->model->checkUser($login, $pass)) {
+            if (empty($this->model->checkUser($login, $pass))) {
                 $this->pageData['error'] = "Неправильный логин или пароль";
             } else {
+                $_SESSION['auth'] = $this->model->checkUser($login, $pass);
                 $this->redirect('/problem');
             }
         }
         $this->view->render($this->pageTpl, $this->pageData);
     }
 
-    public function beforeAction ()
+    public function beforeAction()
     {
-        if ($_SESSION['user']) {
+        if ($_SESSION['auth']) {
             $this->redirect('/problem');
         }
     }
 
-    public function logout ()
+    public function logout()
     {
         session_start();
         session_destroy();

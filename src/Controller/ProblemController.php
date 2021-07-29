@@ -11,23 +11,23 @@ class ProblemController extends Controller
 
     public $pageTpl = "/views/userView.php";
 
-    public function __construct ()
+    public function __construct()
     {
         $this->beforeAction();
         $this->model = new ProblemModel();
         $this->view = new View();
     }
 
-    public function index ()
+    public function index()
     {
         $this->pageData['problem'] = $this->model->getTable();
-        if ($_SESSION['user'] == 'user 1' or $_SESSION['user'] == 'user 2') {
+        if ($_SESSION['auth']) {
             $this->model->getTable();
         }
         $this->view->render($this->pageTpl, $this->pageData);
     }
 
-    public function addProblem ()
+    public function addProblem()
     {
         if (!empty($_POST['problem']) && !empty($_POST['decision'])) {
             $data = $_POST;
@@ -37,7 +37,7 @@ class ProblemController extends Controller
         $this->redirect('/problem');
     }
 
-    public function addRating ()
+    public function addRating()
     {
         if ($_POST) {
             $data = $_POST;
@@ -47,9 +47,9 @@ class ProblemController extends Controller
         $this->redirect('/problem');
     }
 
-    public function beforeAction ()
+    public function beforeAction()
     {
-        if ($_SESSION['right']) {
+        if ($_SESSION['auth']['name'] === 'admin') {
             $this->pageTpl = "/views/adminView.php";
         }
     }

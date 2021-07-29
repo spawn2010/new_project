@@ -1,12 +1,13 @@
 <?php
 
 namespace Core;
+
 use Exception;
 
 class Router
 {
 
-    public static function buildRoute ()
+    public static function buildRoute()
     {
         $controllerName = "IndexController";
         $modelName = "IndexModel";
@@ -19,7 +20,7 @@ class Router
         if (isset($route[2]) && $route[2] != '') {
             $action = $route[2];
         }
-        //или я чего то не понимаю но вроде как то не так это работает, как должно
+        $controllerName = 'Controller\\' . $controllerName;
         try {
             $controller = new $controllerName();
             $controller->$action();
@@ -28,7 +29,7 @@ class Router
         }
     }
 
-    public static function ErrorPage404 ()
+    function ErrorPage404()
     {
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
         header('HTTP/1.1 404 Not Found');
