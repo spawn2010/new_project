@@ -61,7 +61,7 @@
         </tbody>
     </table>
 </form>
-<form action="index/logout" method="post">
+<form action="user/logout" method="post">
     <button class="btn btn-success" type="submit" name="exit">Выйти</button>
 </form>
 </body>

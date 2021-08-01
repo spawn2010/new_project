@@ -1,15 +1,15 @@
 <?php
 
-namespace Core;
+namespace src\Core;
 class Controller
 {
-    public $table;
+    public Controller $table;
 
-    public $model;
+    public Model $model;
 
-    public $view;
+    public View $view;
 
-    protected $pageData = array();
+    protected array $pageData = array();
 
     public function __construct ()
     {
@@ -18,11 +18,11 @@ class Controller
         $this->beforeAction();
     }
 
-    public function beforeAction ()
+    public function beforeAction (): void
     {
     }
 
-    public function redirect ($adr)
+    public function redirect ($adr): void
     {
         header("Location: $adr");
     }

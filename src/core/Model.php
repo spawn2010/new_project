@@ -1,20 +1,20 @@
 <?php
 
-namespace Core;
+namespace src\Core;
 
 use PDO;
 
 class Model
 {
 
-    protected $db = null;
+    protected ?PDO $db = null;
 
     public function __construct ()
     {
         $this->db = DB::connToDB();
     }
 
-    public function insert ($key, $value, $data, $table)
+    public function insert ($key, $value, $data, $table): bool
     {
         $sql = "INSERT INTO `{$table}` ({$key}) VALUES ({$value})";
         $stmt = $this->db->prepare($sql);
@@ -22,17 +22,18 @@ class Model
         return true;
     }
 
-    public function update ($param, $table)
+    public function update ($data, $table, $params): bool
     {
-        foreach ($param as $key => $value) {
-            foreach ($param[$key] as $key_2 => $value_2) {
-                $param[$key] = $value_2;
+        $params = implode(' ', array_values($params));
+        foreach ($data as $key => $value) {
+            foreach ($value as $key_2 => $value_2) {
+                $data[$key] = $value_2;
             }
         }
-        //не понимаю почему не работает если вместо problem подставить {$table}
-        $sql = 'UPDATE problem SET rating = :rating WHERE id = :id';
+        $sql = "UPDATE {$table} {$params}";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute($param);
+        $stmt->execute($data);
+        return true;
     }
 
     public function get ($table, $data = [], $params = [])

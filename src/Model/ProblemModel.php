@@ -1,12 +1,10 @@
 <?php
 
-namespace Model;
+namespace src\Model;
 
-use core\Model;
+use src\core\Model;
 use PDO;
 
-// все параметры которые я здесь определяю и передаю функциям Core/Model должны быть здесь или же они должны определяться
-// в контроллере и передаваться сюда ?
 class ProblemModel extends Model
 {
 
@@ -16,16 +14,17 @@ class ProblemModel extends Model
         return $this->get($table);
     }
 
-    public function addRating ($data)
+    public function addRating ($data): void
     {
-        var_dump($data);
-        $param['id'] = array_keys($data);
-        $param['rating'] = array_values($data);
+        $params['param_1'] = 'SET rating = :rating';
+        $params['param_2'] = 'WHERE id = :id';
+        $value['id'] = array_keys($data);
+        $value['rating'] = array_values($data);
         $table = 'problem';
-        $this->update($param, $table);
+        $this->update($value, $table, $params);
     }
 
-    public function addProblem ($data)
+    public function addProblem ($data): void
     {
         $table = 'problem';
         $key = '`' . implode('`, `', array_keys($data)) . '`';

@@ -48,7 +48,7 @@
     </table>
     <button class="btn btn-success" type="submit">Добавить</button>
 </form>
-<form class="container mt-4" action="index/logout" method="post">
+<form class="container mt-4" action="user/logout" method="post">
     <button class="btn btn-success" type="submit" name="exit">Выйти</button>
 </form>
 </body>

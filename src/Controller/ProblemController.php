@@ -1,15 +1,15 @@
 <?php
 
-namespace Controller;
+namespace src\Controller;
 
-use Model\ProblemModel;
-use Core\View;
-use Core\Controller;
+use src\Model\ProblemModel;
+use src\Core\View;
+use src\Core\Controller;
 
 class ProblemController extends Controller
 {
 
-    public $pageTpl = "/views/userView.php";
+    public string $pageTpl = "/views/userView.php";
 
     public function __construct ()
     {
@@ -18,16 +18,16 @@ class ProblemController extends Controller
         $this->view = new View();
     }
 
-    public function index ()
+    public function index (): void
     {
         $this->pageData['problem'] = $this->model->getTable();
-        if ($_SESSION['user'] == 'user 1' or $_SESSION['user'] == 'user 2') {
+        if ($_SESSION['auth']) {
             $this->model->getTable();
         }
         $this->view->render($this->pageTpl, $this->pageData);
     }
 
-    public function addProblem ()
+    public function addProblem (): void
     {
         if (!empty($_POST['problem']) && !empty($_POST['decision'])) {
             $data = $_POST;
@@ -37,7 +37,7 @@ class ProblemController extends Controller
         $this->redirect('/problem');
     }
 
-    public function addRating ()
+    public function addRating (): void
     {
         if ($_POST) {
             $data = $_POST;
@@ -47,9 +47,9 @@ class ProblemController extends Controller
         $this->redirect('/problem');
     }
 
-    public function beforeAction ()
+    public function beforeAction (): void
     {
-        if ($_SESSION['right']) {
+        if ($_SESSION['auth']['name'] === 'admin') {
             $this->pageTpl = "/views/adminView.php";
         }
     }

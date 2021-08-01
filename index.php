@@ -1,3 +1,3 @@
 <?php
 session_start();
-require_once("conf/conf.php");
+require_once("conf/bootstrap.php");

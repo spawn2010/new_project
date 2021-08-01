@@ -1,47 +1,38 @@
 <?php
 
-namespace Core;
+namespace src\Core;
+
+use Exception;
+
 class Router
 {
 
-    public static function buildRoute ()
+    public static function buildRoute (): void
     {
-        $controllerName = "IndexController";
-        $modelName = "IndexModel";
+        $controllerName = "UserController";
         $action = "index";
         $route = explode("/", $_SERVER['REQUEST_URI']);
-        if ($route[1] != '') {
+        if ($route[1] !== '') {
             $controllerName = ucfirst($route[1] . "Controller");
-            $modelName = ucfirst($route[1] . "Model");
         }
-        if (isset($route[2]) && $route[2] != '') {
+        if (isset($route[2]) && $route[2] !== '') {
             $action = $route[2];
         }
-        $controllerName = 'Controller\\' . $controllerName;
-        $controller = new $controllerName();
-        $controller->$action();
-        /*
-        $controller_path = CONTROLLER_PATH . $controllerName . ".php";
-        $model_path = MODEL_PATH . $modelName . ".php";
-        if (file_exists($controller_path) && file_exists($model_path)) {+
-            // require_once $controller_path;
-            //require_once $model_path;
-            //echo $controllerName . "<br>";
+         $controllerName = 'src\Controller\\' . $controllerName;
+        try {
             $controller = new $controllerName();
             $controller->$action();
-        } else {
-            Router::ErrorPage404();
-        } */
+        } catch (Exception $exception) {
+            (new self)->ErrorPage404();
+        }
     }
 
-    function ErrorPage404 ()
+    public function ErrorPage404 (): void
     {
-        //echo CONTROLLER_PATH;
-        /*
-        $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+        $host = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:' . $host . '404');
-        var_dump(explode("/", $_SERVER['REQUEST_URI']));  */
+        var_dump(explode("/", $_SERVER['REQUEST_URI']));
     }
 }
