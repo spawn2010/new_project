@@ -10,12 +10,11 @@
     }
   ],
   "require": {
-    "doctrine/orm": "2.9.3"
+    "ext-pdo": "*"
   },
-
   "autoload": {
     "psr-4": {
-      "src\\": "src"
+      "app\\": "src"
     }
   }
 }

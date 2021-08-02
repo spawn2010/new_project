@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Model;
+namespace app\Model;
 
-use src\core\Model;
+use app\core\Model;
 use PDO;
 
 class UserModel extends Model
@@ -25,7 +25,7 @@ class UserModel extends Model
             'login' => (string)$login,
             'pass' => (string)$pass
         ];
-        if ($login == 'user 2') {
+        if ($login === 'user 2') {
             $data['name'] = 'admin';
         } else {
             $data['name'] = 'user';

@@ -1,11 +1,12 @@
 <?php
 
-namespace src\Core;
+namespace app\Core;
 
 use PDO;
 
 class DB
 {
+
     public const USER = "root";
     public const PASS = '';
     public const HOST = "localhost";

@@ -1,10 +1,10 @@
 <?php
 
-namespace src\Controller;
+namespace app\Controller;
 
-use src\Core\Controller;
-use src\Model\UserModel;
-use src\Core\View;
+use app\Core\Controller;
+use app\Model\UserModel;
+use app\Core\View;
 
 class UserController extends Controller
 {
