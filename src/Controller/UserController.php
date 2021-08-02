@@ -8,11 +8,11 @@ use app\Core\View;
 
 class UserController extends Controller
 {
-
     private string $pageTpl = '/views/indexView.php';
 
     public function __construct ()
     {
+        parent::__construct();
         $this->model = new UserModel();
         $this->view = new View();
         $this->beforeAction();
@@ -60,4 +60,3 @@ class UserController extends Controller
     }
 }
 
-?>

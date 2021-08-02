@@ -8,11 +8,11 @@ use app\Core\Controller;
 
 class ProblemController extends Controller
 {
-
     public string $pageTpl = "/views/userView.php";
 
     public function __construct ()
     {
+        parent::__construct();
         $this->beforeAction();
         $this->model = new ProblemModel();
         $this->view = new View();

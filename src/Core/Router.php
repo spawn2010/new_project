@@ -6,7 +6,6 @@ use Exception;
 
 class Router
 {
-
     public static function buildRoute (): void
     {
         $controllerName = "UserController";
@@ -20,12 +19,12 @@ class Router
         }
         //почему если поменять app на src перестает работать, файл же находится в каталоге \mvc\src\Controller\UserController.php
         //пространство имен переопределяет название каталогов для автолоадинга ?
-         $controllerName = 'app\Controller\\' . $controllerName;
+        $controllerName = 'app\Controller\\' . $controllerName;
         try {
             $controller = new $controllerName();
             $controller->$action();
         } catch (Exception $exception) {
-            //не понимаю как работает эта конструкция, не понимаю почему не работают исключения
+            //не работают исключения через autoload composer
             (new self)->ErrorPage404();
         }
     }

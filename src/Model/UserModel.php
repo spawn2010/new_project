@@ -7,7 +7,6 @@ use PDO;
 
 class UserModel extends Model
 {
-
     public function checkUser ($login, $pass)
     {
         $table = 'users';

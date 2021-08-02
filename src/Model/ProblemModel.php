@@ -7,7 +7,6 @@ use PDO;
 
 class ProblemModel extends Model
 {
-
     public function getTable ()
     {
         $table = 'problem';
