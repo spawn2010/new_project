@@ -2,54 +2,64 @@
 
 namespace app\Core;
 
-use PDO;
+use Doctrine\DBAL\Exception;
 
 class Model
 {
-    protected ?PDO $db = null;
+    protected ?\Doctrine\DBAL\Connection $db2 = null;
 
-    public function __construct ()
+    /**
+     * @throws Exception
+     */
+    public function __construct()
     {
-        $this->db = DB::connToDB();
+        $this->db2 = DB2::connToDB2();
     }
 
-    public function insert ($key, $value, $data, $table): bool
+    /**
+     * @throws Exception
+     */
+    public function insert($table, $array): void
     {
-        $sql = "INSERT INTO `{$table}` ({$key}) VALUES ({$value})";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($data);
-        return true;
+        $value = (array_values($array));
+        foreach ($array as $key => $params) {
+            $array[$key] = '?';
+        }
+        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder
+            ->insert((string)$table)
+            ->values(
+                $array
+            )
+            ->setParameters(
+                $value
+            )
+            ->executeQuery();
     }
 
-    public function update ($data, $table, $params): bool
+    /**
+     * @throws Exception
+     */
+    public function update2($id, $rating): void
+    {
+        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder->update('problem')
+            ->set('rating', (string)$rating)
+            ->where("id = $id")
+            ->executeQuery();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAll($table, $params = ["*"]): array
     {
         $params = implode(' ', array_values($params));
-        foreach ($data as $key => $value) {
-            foreach ($value as $key_2 => $value_2) {
-                $data[$key] = $value_2;
-            }
-        }
-        $sql = "UPDATE {$table} {$params}";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($data);
-        return true;
-    }
-
-    public function get ($table, $data = [], $params = [])
-    {
-        $params = implode(' ', array_values($params));
-        $sql = "SELECT * FROM {$table} {$params}";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($data);
-        if (!$params) {
-            $res = array();
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $res[$row['id']] = $row;
-            }
-        } else {
-            $res = $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        return $res;
+        $queryBuilder = $this->db2->createQueryBuilder();
+        $res = $queryBuilder
+            ->select((string)($params))
+            ->from((string)($table));
+        return ($res->fetchAllAssociative());
     }
 }
 

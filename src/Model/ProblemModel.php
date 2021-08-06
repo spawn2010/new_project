@@ -2,33 +2,32 @@
 
 namespace app\Model;
 
-use app\core\Model;
-use PDO;
+use app\Core\Model;
+use Doctrine\DBAL\Exception;
 
 class ProblemModel extends Model
 {
-    public function getTable ()
+    public static function tableName(): string
     {
-        $table = 'problem';
-        return $this->get($table);
+        return 'problem';
     }
 
-    public function addRating ($data): void
+    /**
+     * @throws Exception
+     */
+    public function addRating($data): void
     {
-        $params['param_1'] = 'SET rating = :rating';
-        $params['param_2'] = 'WHERE id = :id';
-        $value['id'] = array_keys($data);
-        $value['rating'] = array_values($data);
-        $table = 'problem';
-        $this->update($value, $table, $params);
+        $id = (key($data));
+        $rating = (($data[$id]));
+        $this->update2($id, $rating);
     }
 
-    public function addProblem ($data): void
+    /**
+     * @throws Exception
+     */
+    public function addProblem($data): void
     {
-        $table = 'problem';
-        $key = '`' . implode('`, `', array_keys($data)) . '`';
-        $value = ':' . implode(', :', array_keys($data));
-        $this->insert($key, $value, $data, $table);
+        $this->insert(self::tableName(), $data);
     }
 }
 

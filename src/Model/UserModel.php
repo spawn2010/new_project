@@ -2,38 +2,39 @@
 
 namespace app\Model;
 
-use app\core\Model;
-use PDO;
+use app\Core\Model;
+use Doctrine\DBAL\Exception;
 
 class UserModel extends Model
 {
-    public function checkUser ($login, $pass)
+    public static function tableName(): string
     {
-        $table = 'users';
-        $data['login'] = $login;
-        $data['pass'] = $pass;
-        $params['param_1'] = 'WHERE login = :login';
-        $params['param_2'] = 'AND pass = :pass';
-        $res = $this->get($table, $data, $params);
+        return 'users';
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function get($login, $pass)
+    {
+        $queryBuilder = $this->db2->createQueryBuilder();
+        $res = $queryBuilder
+            ->select('*')
+            ->from('users')
+            ->where('login = ?')
+            ->andWhere('pass = ?')
+            ->setParameter(0, $login)
+            ->setParameter(1, $pass);
+        $res = $res->fetchAssociative();
         return ($res);
     }
 
-    public function addUser ($login, $pass): void
+    /**
+     * @throws Exception
+     */
+    public function addUser($data): void
     {
-        $data = [
-            'login' => (string)$login,
-            'pass' => (string)$pass
-        ];
-        if ($login === 'user 2') {
-            $data['name'] = 'admin';
-        } else {
-            $data['name'] = 'user';
-        }
-        $table = 'users';
-        array_pop($_POST);
-        $_POST['name'] = 'name';
-        $key = '`' . implode('`, `', array_keys($_POST)) . '`';
-        $value = ':' . implode(', :', array_keys($_POST));
-        $this->insert($key, $value, $data, $table);
+        $data['pass'] = md5($data['pass']);
+        $this->insert(self::tableName(), $data);
     }
 }

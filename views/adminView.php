@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Таблица</title>
-    <link rel="stylesheet" href="/public/css/rating/rating.css">
+    <link rel="stylesheet" href="/css/rating/rating.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -31,11 +31,14 @@
         $k = 1;
         foreach ($pageData['problem'] as $key => $value) { ?>
             <tr>
-                <td><?php echo $value['problem']; ?></td>
-                <td><?php echo $value['decision']; ?> </td>
+                <td><?php
+                    echo $value['problem']; ?></td>
+                <td><?php
+                    echo $value['decision']; ?> </td>
                 <td>
                     <div class="rating-result">
-                        <?php $i = 1;
+                        <?php
+                        $i = 1;
                         if ($value['rating'] != '')
                         {
                         while ($i <= $value['rating']) {
@@ -45,7 +48,8 @@
                     } else { ?>
                         <form method="post">
                             <div class="rating-area">
-                                <?php for ($n = 5; $n != 0; $n--) {
+                                <?php
+                                for ($n = 5; $n != 0; $n--) {
                                     ?><input  formaction="problem/addRating" type="submit" id="star-.<?= $k ?>"
                                               name="<?= $value ['id']; ?>"
                                               value="<?= $n ?>">
@@ -54,10 +58,12 @@
                                 } ?>
                             </div>
                         </form>
-                        <?php ;
+                        <?php
+                        ;
                     } ?> </td>
             </tr>
-        <?php } ?>
+            <?php
+        } ?>
         </tbody>
     </table>
 </form>

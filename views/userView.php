@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Таблица</title>
-    <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/css/rating/rating.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/rating/rating.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -33,17 +33,21 @@
         <?php
         foreach ($pageData['problem'] as $key => $value) { ?>
             <tr>
-                <td><?php echo $value['problem']; ?></td>
-                <td><?php echo $value['decision']; ?> </td>
+                <td><?php
+                    echo $value['problem']; ?></td>
+                <td><?php
+                    echo $value['decision']; ?> </td>
                 <td>
-                    <div class="rating-result"><?php $i = 1;
+                    <div class="rating-result"><?php
+                        $i = 1;
                         while ($i <= $value['rating']) {
                             echo '<span class="active"></span>';
                             $i++;
                         } ?> </div>
                 </td>
             </tr>
-        <?php } ?>
+            <?php
+        } ?>
         </tbody>
     </table>
     <button class="btn btn-success" type="submit">Добавить</button>
