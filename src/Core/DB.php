@@ -2,21 +2,22 @@
 
 namespace app\Core;
 
-use PDO;
+use Doctrine\DBAL\Exception;
 
 class DB
 {
-    public const USER = "root";
-    public const PASS = '';
-    public const HOST = "localhost";
-    public const DB = "register-bd";
-
-    public static function connToDB (): PDO
+    /**
+     * @throws Exception
+     */
+    public static function connToDB(): \Doctrine\DBAL\Connection
     {
-        $user = self::USER;
-        $pass = self::PASS;
-        $host = self::HOST;
-        $db = self::DB;
-        return new PDO("mysql:dbname=$db;host=$host", $user, $pass);
+        $connectionParams = array(
+            'dbname' => 'register-bd',
+            'user' => 'root',
+            'password' => '',
+            'host' => 'localhost',
+            'driver' => 'pdo_mysql',
+        );
+        return \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
     }
 }

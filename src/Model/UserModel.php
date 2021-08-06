@@ -17,7 +17,7 @@ class UserModel extends Model
      */
     public function get($login, $pass)
     {
-        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $res = $queryBuilder
             ->select('*')
             ->from('users')

@@ -43,6 +43,9 @@ class ProblemController extends Controller
         $this->redirect('/problem');
     }
 
+    /**
+     * @throws Exception
+     */
     public function addRating(): void
     {
         if ($_POST) {

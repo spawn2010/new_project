@@ -6,14 +6,14 @@ use Doctrine\DBAL\Exception;
 
 class Model
 {
-    protected ?\Doctrine\DBAL\Connection $db2 = null;
+    protected ?\Doctrine\DBAL\Connection $db = null;
 
     /**
      * @throws Exception
      */
     public function __construct()
     {
-        $this->db2 = DB2::connToDB2();
+        $this->db = DB::connToDB();
     }
 
     /**
@@ -25,7 +25,7 @@ class Model
         foreach ($array as $key => $params) {
             $array[$key] = '?';
         }
-        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->insert((string)$table)
             ->values(
@@ -42,7 +42,7 @@ class Model
      */
     public function update2($id, $rating): void
     {
-        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder->update('problem')
             ->set('rating', (string)$rating)
             ->where("id = $id")
@@ -55,7 +55,7 @@ class Model
     public function getAll($table, $params = ["*"]): array
     {
         $params = implode(' ', array_values($params));
-        $queryBuilder = $this->db2->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $res = $queryBuilder
             ->select((string)($params))
             ->from((string)($table));
