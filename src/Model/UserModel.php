@@ -25,8 +25,7 @@ class UserModel extends Model
             ->andWhere('pass = ?')
             ->setParameter(0, $login)
             ->setParameter(1, $pass);
-        $res = $res->fetchAssociative();
-        return ($res);
+        return $res->fetchAssociative();
     }
 
     /**

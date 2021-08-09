@@ -19,20 +19,20 @@ class Model
     /**
      * @throws Exception
      */
-    public function insert($table, $array): void
+    public function insert($table, $data): void
     {
-        $value = (array_values($array));
-        foreach ($array as $key => $params) {
-            $array[$key] = '?';
+        $values = (array_values($data));
+        foreach ($data as $key => $params) {
+            $keys[$key] = '?';
         }
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->insert((string)$table)
             ->values(
-                $array
+                $keys
             )
             ->setParameters(
-                $value
+                $values
             )
             ->executeQuery();
     }
@@ -40,7 +40,7 @@ class Model
     /**
      * @throws Exception
      */
-    public function update2($id, $rating): void
+    public function update($id, $rating): void
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder->update('problem')

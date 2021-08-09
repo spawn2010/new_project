@@ -32,6 +32,5 @@ class Router
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:' . $host . '404');
-        var_dump(explode("/", $_SERVER['REQUEST_URI']));
     }
 }

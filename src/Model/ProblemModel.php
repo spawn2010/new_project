@@ -19,7 +19,7 @@ class ProblemModel extends Model
     {
         $id = (key($data));
         $rating = (($data[$id]));
-        $this->update2($id, $rating);
+        $this->update($id, $rating);
     }
 
     /**
