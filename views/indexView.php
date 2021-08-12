@@ -2,16 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Форма регистрации</title>
+    <title>Начальная страница</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
+    <div class="container-fluid">
+        <a class="navbar-brand" >Logo</a>
+    </div>
+</nav>
 <div class="container mt-4">
     <div class="col">
-        <h1>Авторизация</h1>
         <form method="post">
+            <h1 style="text-align: center;">Авторизация</h1>
             <?php
             if (!empty($pageData['error'])) : ?>
                 <p><?php

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<title>Таблица</title>
+<title>Добавление инцидентов</title>
 
 <link rel="stylesheet" href="/css/rating/rating.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -27,35 +28,33 @@
         </div>
     </nav>
 </header>
-<div class="container-fluid m-5">
+<div class="container-fluid mt-5">
 
      <div class="col-12 col-md-6 p-2" >
        <h1>Список инцидентов</h1>
     </div>
     <div class=" col-md-5" >
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-            Добавить проблему
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Добавить инцидент
         </button>
-
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Введите данные</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Добавление инцидента</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="problem/addProblem" method="post">
                     <div class="modal-body">
                         <tr>
                             <td>
-                                <input type="text" class="form-control-s " placeholder="Опишите проблему" name="problem">
+                                <input type="text" class="form-control"  placeholder="Опишите проблему" name="problem" aria-describedby="basic-addon1">
+                                <hr>
                             </td>
                             <td>
-                                <input type="text" class="form-control-s " placeholder="Опишите решение" name="decision">
+                                <input type="text" class="form-control"  placeholder="Опишите решение" name="decision" aria-describedby="basic-addon1">
                             </td>
                             <td>
                                 <div class="rating-result">
@@ -64,8 +63,8 @@
                         </tr>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        <button  class="btn btn-success" type="submit">Добавить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-success">Добавить</button>
                     </div>
                     </form>
                 </div>
@@ -106,8 +105,8 @@
 </form>
 
 </div>
-<footer class="container">
-        <div class="col-md-4 fixed-bottom ">
+<footer class="container mt-5">
+        <div class="col-md-2 ">
             <p>© Не список инцидентов </p>
         </div>
     </footer>

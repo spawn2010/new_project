@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<title>Таблица</title>
+<title>Оценка инцидентов</title>
 
 <link rel="stylesheet" href="/css/rating/rating.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -13,6 +13,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.css">
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
@@ -25,7 +26,7 @@
         </div>
     </nav>
 </header>
-<div class="container-fluid m-5">
+<div class="container-fluid mt-5">
     <div class="col-12 col-md-6 p-2" >
         <h1>Список инцидентов</h1>
     </div>
@@ -55,7 +56,7 @@
                             if ($value['rating'] != '')
                             {
                             while ($i <= $value['rating']) {
-                                echo '<span class="active"></span>';
+                                echo '<span class="active" ></span>';
                                 $i++;
                             } ?></div><?php
                         } else { ?>
@@ -82,8 +83,8 @@
     </form>
 
 </div>
-<footer class="container">
-    <div class="col-md-4 fixed-bottom ">
+<footer class="container mt-5">
+    <div class="col-md-2 ">
         <p>© Не список инцидентов </p>
     </div>
 </footer>

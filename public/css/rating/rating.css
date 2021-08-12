@@ -26,7 +26,7 @@ body {
 }
 
 .rating-area:not(:checked) > label:before {
-    content: '★';
+    content: '\2605';
 }
 
 .rating-area > input:checked ~ label {
@@ -67,7 +67,7 @@ body {
 }
 
 .rating-result > span:before {
-    content: '★';
+    content: '\2605';
 }
 
 .rating-result > span.active {
