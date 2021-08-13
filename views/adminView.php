@@ -18,16 +18,17 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
         <div class="container-fluid">
-            <a class="navbar-brand" >Logo</a>
+            <a class="navbar-brand">Logo</a>
             <form class="d-flex" action="user/logout" method="post">
-                <a class="navbar-brand"><?php echo($_SESSION['auth']['login']);?></a>
+                <a class="navbar-brand"><?php
+                    echo($_SESSION['auth']['login']); ?></a>
                 <button class="btn btn-success" type="submit" name="exit">Выйти</button>
             </form>
         </div>
     </nav>
 </header>
 <div class="container-fluid mt-5">
-    <div class="col-12 col-md-6 p-2" >
+    <div class="col-12 col-md-6 p-2">
         <h1>Список инцидентов</h1>
     </div>
     <form method="post" class="container mt-4">

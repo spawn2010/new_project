@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
     <div class="container-fluid">
-        <a class="navbar-brand" >Logo</a>
+        <a class="navbar-brand">Logo</a>
     </div>
 </nav>
 <div class="container mt-4">
