@@ -31,25 +31,50 @@
     </nav>
 </header>
 <div class="container-fluid mt-5">
-
     <div class="col-12 col-md-6 p-2">
         <h1>Список инцидентов</h1>
     </div>
     <div class=" col-md-5">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-success" id="open-problem-modal">
             Добавить инцидент
         </button>
+
+        <script>
+            $(function () {
+                $('#open-problem-modal').click(function (e) {
+                    e.preventDefault();
+
+                    $('#problem-modal .alert').attr('hidden', true);
+                    $('#problem-modal').modal('show');
+                });
+
+                $('#problem-modal button[type="submit"]').click(function (e) {
+                    var value1 = $('#problem-modal [name="problem"]').val();
+                    var value2 = $('#problem-modal [name="decision"]').val();
+
+                    if ($.trim(value1) == '' || $.trim(value2) == '') {
+                        $('#problem-modal .alert').removeAttr('hidden');
+                        return false;
+                    }
+                });
+            });
+        </script>
+
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="problem-modal" tabindex="-1" aria-labelledby="problem-modalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Добавление инцидента</h5>
+                        <h5 class="modal-title">Добавление инцидента</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="problem/addProblem" method="post">
                         <div class="modal-body">
+                            <div class="alert alert-danger" role="alert" hidden>
+                                Поля не должны быть пустыми
+                            </div>
                             <tr>
                                 <td>
                                     <label for="validationDefault01" class="form-label"></label>
@@ -63,7 +88,6 @@
                                            name="decision" aria-describedby="basic-addon1" required>
                                 </td>
                                 <td>
-
                                 </td>
                             </tr>
                         </div>
@@ -116,3 +140,4 @@
 </footer>
 </body>
 </html>
+

@@ -42,8 +42,6 @@ class ProblemController extends Controller
             $this->model->addProblem($data);
             header_remove();
             $this->redirect('/problem');
-        } else {
-            echo "<script>alert('Описание проблемы или решения не должно быть пустым'); window.location = '/problem';</script>";
         }
     }
 
