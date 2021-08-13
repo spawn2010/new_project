@@ -35,12 +35,16 @@ class ProblemController extends Controller
      */
     public function addProblem(): void
     {
-        if (!empty($_POST['problem']) && !empty($_POST['decision'])) {
+        if (!empty(trim($_POST['problem'])) && !empty(trim($_POST['decision']))) {
+            $_POST['problem'] = (htmlentities(trim($_POST['problem'])));
+            $_POST['decision'] = (htmlentities(trim($_POST['decision'])));
             $data = $_POST;
             $this->model->addProblem($data);
+            header_remove();
+            $this->redirect('/problem');
+        } else {
+            echo "<script>alert('Описание проблемы или решения не должно быть пустым'); window.location = '/problem';</script>";
         }
-        header_remove();
-        $this->redirect('/problem');
     }
 
     /**

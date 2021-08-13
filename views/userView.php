@@ -24,7 +24,6 @@
             <form class="d-flex" action="user/logout" method="post">
                 <a class="navbar-brand"><?php
                     echo($_SESSION['auth']['login']); ?></a>
-
                 <button class="btn btn-success" type="submit" name="exit">Выйти</button>
 
             </form>
@@ -57,7 +56,6 @@
                                     <input type="text" class="form-control" placeholder="Опишите проблему"
                                            id="validationDefault01" name="problem" aria-describedby="basic-addon1"
                                            required>
-
                                 </td>
                                 <td>
                                     <label for="validationDefault02" class="form-label"></label>
@@ -65,8 +63,7 @@
                                            name="decision" aria-describedby="basic-addon1" required>
                                 </td>
                                 <td>
-                                    <div class="rating-result">
-                                    </div>
+
                                 </td>
                             </tr>
                         </div>
